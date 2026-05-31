@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seniors Workspace Dashboard | HDS-09</title>
+  <!-- SEO & Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔐</text></svg>">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- CSS Styling Sheets -->
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Dynamic Feedback Notification Toast Alert -->
+  <div id="global-toast" class="toast-alert" role="alert" aria-live="assertive">
+    <span class="toast-icon">✨</span>
+    <span class="toast-message">Action successful!</span>
+  </div>
+
+  <!-- Locked Passcode Gateway screen -->
+  <div id="admin-lock-screen" class="admin-auth-card" style="margin: 120px auto;">
+    <div class="auth-icon">🔑</div>
+    <h2>พื้นที่จัดการกิจกรรมของพี่ ๆ</h2>
+    <p>กรุณาระบุรหัสผ่าน Seniors Passcode เพื่อยืนยันสิทธิ์ผู้ดูแลระบบ HDS-09</p>
+    
+    <form id="admin-auth-form" onsubmit="handleAdminAuth(event)">
+      <div class="form-group">
+        <input type="password" id="admin-passkey-input" placeholder="ระบุรหัสผ่านผู้จัดงานที่นี่..." required aria-label="Secret Passkey">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">
+        <i data-lucide="unlock"></i> ปลดล็อคเข้าห้องทำงาน
+      </button>
+      <div class="auth-footer-nav" style="margin-top: 20px;">
+        <a href="/" class="btn btn-outline btn-block btn-sm">
+          <i data-lucide="arrow-left"></i> กลับไปหน้าหลักน้องใหม่
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Unlocked Dashboard Workspace -->
+  <div id="admin-workspace" class="admin-dashboard-layout" style="display: none; min-height: 100vh;">
+    
+    <!-- Sidebar nav -->
+    <aside class="admin-sidebar">
+      <div class="admin-profile" onclick="location.reload()" style="cursor: pointer;">
+        <div class="admin-avatar">🎓</div>
+        <div class="admin-info">
+          <h4>ทีมพี่ ๆ Seniors</h4>
+          <p>ผู้ดูแลระบบ HDS-09</p>
+        </div>
+      </div>
+      <nav class="admin-nav" role="tablist">
+        <button class="admin-nav-btn active" id="tab-questions-btn" onclick="switchAdminTab('questions')">
+          <i data-lucide="inbox"></i> คำถามน้องใหม่ <span class="badge badge-danger" id="badge-incoming-count">0</span>
+        </button>
+        <button class="admin-nav-btn" id="tab-moderation-btn" onclick="switchAdminTab('moderation')">
+          <i data-lucide="check-square"></i> คัดกรองการ์ดอวยพร <span class="badge badge-warning" id="badge-pending-messages">0</span>
+        </button>
+        <button class="admin-nav-btn" id="tab-faqs-btn" onclick="switchAdminTab('faqs')">
+          <i data-lucide="help-circle"></i> จัดการข้อมูล FAQ
+        </button>
+        <button class="admin-nav-btn" id="tab-categories-btn" onclick="switchAdminTab('categories')">
+          <i data-lucide="folder-open"></i> จัดการหมวดหมู่
+        </button>
+      </nav>
+      <div class="admin-sidebar-footer">
+        <a href="/" class="btn btn-outline btn-block btn-sm" style="margin-bottom: 8px;">
+          <i data-lucide="arrow-left"></i> ดูหน้าเว็บของน้อง ๆ
+        </a>
+        <button class="btn btn-outline btn-block btn-sm" onclick="handleAdminLogout()">
+          <i data-lucide="log-out"></i> ล็อคสิทธิ์แดชบอร์ด
+        </button>
+      </div>
+    </aside>
+
+    <!-- Content Workspace -->
+    <section class="admin-content-area">
+      
+      <!-- TAB 1: INCOMING FRESHMAN QUESTIONS -->
+      <div id="admin-tab-questions" class="admin-tab-view active">
+        <div class="admin-tab-header">
+          <h3>กล่องจดหมายคำถามจากน้องใหม่</h3>
+          <p>น้องใหม่ส่งคำถามเหล่านี้เข้ามาแบบไม่ระบุตัวตน พี่ ๆ สามารถกดเขียนคำตอบอัปเดตเป็นคู่มือ FAQ ตอบกลับขึ้นหน้าเว็บได้เลยครับ!</p>
+        </div>
+        <div class="admin-card-grid" id="admin-questions-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- TAB 2: WALL MESSAGE MODERATION QUEUE -->
+      <div id="admin-tab-moderation" class="admin-tab-view">
+        <div class="admin-tab-header">
+          <h3>ระบบคัดกรองการ์ดต้อนรับ & อวยพร</h3>
+          <p>ตรวจสอบความเหมาะสมของการ์ดต้อนรับที่ส่งมาจากน้อง ๆ และเพื่อน ๆ อนุมัติเพื่อเผยแพร่ให้ลอยขึ้นหน้าบอร์ด หรือสั่งลบข้อความไม่พึงประสงค์</p>
+        </div>
+        
+        <div class="moderation-subsection" style="margin-bottom: 40px;">
+          <h4 style="font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            📬 คิวรอการตรวจสอบและอนุมัติ
+          </h4>
+          <div class="admin-card-grid" id="admin-moderation-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div class="moderation-subsection" style="border-top: 1px dashed var(--border-light); padding-top: 32px;">
+          <h4 style="font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            ✨ รายการการ์ดที่กำลังแสดงสดบนบอร์ดหน้าบ้าน
+          </h4>
+          <div class="admin-card-grid" id="admin-approved-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: FAQ MANAGEMENT PANEL -->
+      <div id="admin-tab-faqs" class="admin-tab-view">
+        <div class="admin-tab-header">
+          <div class="header-action-group">
+            <div>
+              <h3>ระบบจัดการคู่มือตอบคำถาม (FAQ)</h3>
+              <p>พี่ ๆ สามารถเพิ่มเติมคู่มือคำแนะนำ, แก้ไขคำอธิบายแนวปฏิบัติ หรือสั่งลบข้อมูลการ์ดที่ล้าสมัยได้ที่นี่</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openFaqEditor()">
+              <i data-lucide="plus"></i> สร้างคู่มือ FAQ ใหม่
+            </button>
+          </div>
+        </div>
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>คำถามหลัก</th>
+                <th>หมวดหมู่ย่อย</th>
+                <th>คะแนนสั่งแสดงลำดับ</th>
+                <th class="actions-col">เครื่องมือจัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="admin-faqs-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 4: CATEGORY MANAGEMENT PANEL -->
+      <div id="admin-tab-categories" class="admin-tab-view">
+        <div class="admin-tab-header">
+          <div class="header-action-group">
+            <div>
+              <h3>ระบบจัดการหัวข้อ/หมวดหมู่ข้อมูล</h3>
+              <p>จัดกลุ่มคู่มือ FAQ (เช่น ชุดนิสิต, อาคารเรียน, ลงทะเบียน) เพื่อส่งเสริมความสะดวกในการค้นหาของน้องใหม่</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openCategoryEditor()">
+              <i data-lucide="plus"></i> สร้างหมวดหมู่ใหม่
+            </button>
+          </div>
+        </div>
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ชื่อหมวดหมู่ข้อมูล</th>
+                <th>รหัสสัญลักษณ์ Lucide</th>
+                <th>โทนสีสันหมวดหมู่ HSL</th>
+                <th class="actions-col">เครื่องมือจัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="admin-categories-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Add/Edit FAQ Modal -->
+  <div class="modal-overlay" id="admin-faq-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="faq-modal-title">สร้างคู่มือ FAQ ใหม่</h3>
+        <button class="modal-close-btn" onclick="closeFaqEditor()" aria-label="Close modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="admin-faq-form" onsubmit="saveFaq(event)">
+        <input type="hidden" id="faq-editor-id">
+        <input type="hidden" id="faq-editor-convert-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="faq-editor-question">คำถามหลักสำหรับน้องใหม่ *</label>
+            <input type="text" id="faq-editor-question" required placeholder="เช่น สามารถติดต่อทำบัตรนิสิตใหม่ได้ที่ไหน?">
+          </div>
+          <div class="form-group">
+            <label for="faq-editor-category">เลือกหมวดหมู่ข้อมูล *</label>
+            <select id="faq-editor-category" required>
+              <!-- Dynamic options -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="faq-editor-answer">เนื้อหาอธิบายคำตอบที่เป็นประโยชน์ *</label>
+            <textarea id="faq-editor-answer" rows="4" required placeholder="เช่น น้อง ๆ สามารถติดต่อขอทำบัตรประจำตัวนิสิตได้ที่ตึกบริหารกลาง ชั้น 1 ในวันเรียนปกติ..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="faq-editor-priority">คะแนนสั่งจัดลำดับ (เลขมากจะแสดงก่อนเพื่อน)</label>
+            <input type="number" id="faq-editor-priority" value="0">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeFaqEditor()">ยกเลิก</button>
+          <button type="submit" class="btn btn-primary">
+            <i data-lucide="save"></i> บันทึกข้อมูล FAQ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Add/Edit Category Modal -->
+  <div class="modal-overlay" id="admin-category-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="category-modal-title">สร้างหมวดหมู่ข้อมูลใหม่</h3>
+        <button class="modal-close-btn" onclick="closeCategoryEditor()" aria-label="Close modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="admin-category-form" onsubmit="saveCategory(event)">
+        <input type="hidden" id="category-editor-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="category-editor-name">ชื่อหมวดหมู่ข้อมูลพร้อมอิโมจิ *</label>
+            <input type="text" id="category-editor-name" required placeholder="เช่น การเดินทางรถบัส 🚌">
+          </div>
+          <div class="form-group">
+            <label for="category-editor-icon">ชื่อไอคอนสัญลักษณ์ Lucide</label>
+            <input type="text" id="category-editor-icon" placeholder="เช่น home, map-pin, shirt, clipboard" value="help-circle">
+            <span class="input-limit">ระบุชื่อเรียกสัญลักษณ์มาตรฐานของ Lucide (เช่น clipboard, shirt, book-open, map-pin)</span>
+          </div>
+          <div class="form-group">
+            <label for="category-editor-color">โค้ดรหัสสีสัน HSL ประจำกลุ่มข้อมูล</label>
+            <input type="text" id="category-editor-color" placeholder="เช่น hsl(165, 80%, 45%)" value="hsl(20, 90%, 60%)">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeCategoryEditor()">ยกเลิก</button>
+          <button type="submit" class="btn btn-primary">
+            <i data-lucide="save"></i> บันทึกหมวดหมู่ข้อมูล
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Core admin scripts logic -->
+  <script src="admin.js"></script>
+</body>
+</html>

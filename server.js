@@ -8,7 +8,7 @@ const fs = require('fs');
 // Load environment variables / set defaults
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
-const ADMIN_SECRET = process.env.ADMIN_SECRET || 'welcomefamily2026';
+const ADMIN_SECRET = process.env.ADMIN_SECRET || 'jeannarukjungboey1234' || 'HelloHDSgen9';
 
 const app = express();
 
@@ -81,14 +81,14 @@ db.serialize(() => {
     if (err) return console.error("Error checking categories database status:", err);
 
     if (row && row.count === 0) {
-      console.log("Database initialized. Seeding warm orientation content...");
+      console.log("Database initialized. Seeding warm orientation content in Thai...");
 
       const categoriesSeed = [
-        { name: "Documents 🎒", icon: "file-text", color: "hsl(14, 95%, 70%)" },
-        { name: "Uniforms 👕", icon: "shirt", color: "hsl(165, 80%, 45%)" },
-        { name: "Registration 📝", icon: "clipboard", color: "hsl(330, 85%, 65%)" },
-        { name: "Courses 📚", icon: "book-open", color: "hsl(210, 90%, 60%)" },
-        { name: "Campus Life 🏫", icon: "map-pin", color: "hsl(45, 95%, 55%)" }
+        { name: "เอกสารสำคัญ 🎒", icon: "file-text", color: "hsl(14, 95%, 70%)" },
+        { name: "เครื่องแต่งกาย 👕", icon: "shirt", color: "hsl(165, 80%, 45%)" },
+        { name: "การลงทะเบียน 📝", icon: "clipboard", color: "hsl(330, 85%, 65%)" },
+        { name: "วิชาเรียน & ตาราง 📚", icon: "book-open", color: "hsl(210, 90%, 60%)" },
+        { name: "ชีวิตในมหาลัย 🏫", icon: "map-pin", color: "hsl(45, 95%, 55%)" }
       ];
 
       const stmt = db.prepare("INSERT INTO categories (name, icon, color_scheme) VALUES (?, ?, ?)");
@@ -100,33 +100,33 @@ db.serialize(() => {
       // Seed core orientation FAQs linked to these categories
       const faqsSeed = [
         {
-          catId: 1, // Documents
-          q: "What documents must I present on Registration Day?",
-          a: "Please bring your original high school transcript, a printed copy of your acceptance letter, 2 copies of your ID card/passport, and 4 passport-sized photos with a light blue background. Don't worry, seniors will be right outside the gate to guide you to the checklist desk!",
+          catId: 1, // เอกสารสำคัญ
+          q: "ในวันรายงานตัว/ลงทะเบียน ต้องเตรียมเอกสารอะไรไปบ้าง?",
+          a: "เอกสารที่ต้องนำมาด้วย ได้แก่ ใบแสดงผลการเรียน (Transcript) ตัวจริง, ใบรับรองการตอบรับเข้าเรียน, สำเนาบัตรประชาชน 2 ชุด และรูปถ่ายหน้าตรงขนาด 1 นิ้ว จำนวน 4 ใบ (พื้นหลังสีฟ้าล้วน) ไม่ต้องกังวลนะครับ วันรายงานตัวจะมีพี่ ๆ สแตนบายรอช่วยตรวจเช็คและพาเดินไปตามจุดต่าง ๆ ตลอดทางเลย!",
           priority: 10
         },
         {
-          catId: 2, // Uniforms
-          q: "Are white sneakers mandatory, or can I wear colored ones?",
-          a: "Standard regulations suggest plain white sneakers for formal events. However, for everyday lectures, comfortable shoes of any color are perfectly fine! Tip: Orientation week involves a lot of walking, so prioritize comfort!",
+          catId: 2, // เครื่องแต่งกาย
+          q: "รองเท้าผ้าใบสีขาวจำเป็นต้องใส่ในวันแรกไหม หรือใส่สีอื่นได้?",
+          a: "ตามกฎระเบียบของมหาวิทยาลัย สำหรับกิจกรรมที่เป็นพิธีการหรือวันปฐมนิเทศรวม แนะนำให้ใส่รองเท้าผ้าใบสีขาวล้วนที่สะอาดเรียบร้อยครับ แต่สำหรับวันเรียนปกติหรือกิจกรรมสันทนาการ น้อง ๆ สามารถสวมใส่รองเท้าผ้าใบหรือรองเท้าหุ้มส้นสีสุภาพทั่วไปได้เลย แนะนำให้เลือกรองเท้าที่ใส่สบายที่สุดเพราะวันแรก ๆ เดินเยอะมากครับ!",
           priority: 9
         },
         {
-          catId: 3, // Registration
-          q: "I am late for the registration session. Can I register online?",
-          a: "Yes! The online portal remains open for late additions. After registering online, please visit the central registry office on Building A, Floor 2, to collect your student handbook and badge.",
+          catId: 3, // การลงทะเบียน
+          q: "หากเข้ารอบลงทะเบียนวิชาเรียนช่วงเช้าไม่ทัน ต้องทำอย่างไร?",
+          a: "ไม่ต้องตกใจไปครับ! ระบบลงทะเบียนออนไลน์จะเปิดให้ลงทะเบียนรอบล่าช้าอยู่ หลังจากกดลงทะเบียนในเว็บเสร็จเรียบร้อยแล้ว น้อง ๆ สามารถเข้ามารับคู่มือนักศึกษาและบัตรประจำตัวได้ที่ห้องทะเบียนกลาง ณ อาคารเรียน A ชั้น 2 ในสัปดาห์แรกของการเปิดเรียนได้ตามปกติครับ",
           priority: 8
         },
         {
-          catId: 4, // Courses
-          q: "How do I add or drop elective courses?",
-          a: "You can modify your syllabus choices during the first two weeks of classes using the 'RegPortal' student site. Your faculty advisor must sign off on changes, so we recommend dropping by their office early!",
+          catId: 4, // วิชาเรียน & ตาราง
+          q: "การเพิ่มหรือลดรายวิชาเรียน (Add/Drop) มีขั้นตอนอย่างไรบ้าง?",
+          a: "น้อง ๆ สามารถดำเนินการขอเพิ่ม-ลดวิชาเรียนได้เองในระบบ RegPortal ของมหาวิทยาลัยในช่วง 2 สัปดาห์แรกของภาคเรียนครับ โดยวิชาเลือกหรือวิชาเสรีบางตัวจะต้องมีลายเซ็นดิจิทัลอนุมัติจากอาจารย์ที่ปรึกษาก่อน พี่ ๆ แนะนำให้รีบไปยื่นเรื่องตั้งแต่วันแรก ๆ เพื่อป้องกันวิชาเรียนยอดฮิตเต็มนะครับ!",
           priority: 7
         },
         {
-          catId: 5, // Campus Life
-          q: "Where is the best food court on campus?",
-          a: "Definitely the Student Center Food Plaza! It has amazing dynamic street-food stalls, student discount prices, and a vibrant outdoor seating garden where clubs gather. Try the chicken noodles on Stall 4!",
+          catId: 5, // ชีวิตในมหาลัย
+          q: "โรงอาหารไหนอร่อย คุ้มค่า และเดินทางไปง่ายที่สุด?",
+          a: "แนะนำ 'ศูนย์อาหาร Student Center Plaza' ใต้ตึกกิจกรรมนักศึกษาเลยครับ! มีร้านสตรีทฟู้ดอร่อย ๆ หลากหลายมาก ราคาเป็นมิตรกับนักศึกษา และมีพื้นที่นั่งเล่นในสวนหย่อมรับลมธรรมชาติที่ชมรมต่าง ๆ ชอบมานั่งทำกิจกรรมกัน เมนูเด็ดที่ห้ามพลาดคือบะหมี่ไก่ตุ๋นร้านที่ 4 ครับ!",
           priority: 6
         }
       ];
@@ -137,20 +137,9 @@ db.serialize(() => {
       });
       faqStmt.finalize();
 
-      // Seed initial welcoming message wall items
-      const messagesSeed = [
-        { name: "Jamie (Senior 🦁)", msg: "Welcome to our big family, freshies! You are going to love it here!", sticker: "🎉", colors: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" },
-        { name: "P' Dan 🎓", msg: "If you get lost in Building C, look for the seniors wearing green shirts! We are here to help.", sticker: "🧸", colors: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)" },
-        { name: "Anonymous 🎒", msg: "Uniform shoes are white, but my energy is 100% colorful today! Let's go orientation week!", sticker: "🎈", colors: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)" }
-      ];
+      // (No pre-seeded message wall items - database starts completely clean!)
 
-      const msgStmt = db.prepare("INSERT INTO message_wall (nickname, message, sticker, color_palette, is_approved) VALUES (?, ?, ?, ?, 1)");
-      messagesSeed.forEach(m => {
-        msgStmt.run(m.name, m.msg, m.sticker, m.colors);
-      });
-      msgStmt.finalize();
-
-      console.log("Database seeded successfully.");
+      console.log("Database seeded successfully in Thai.");
     }
   });
 });
@@ -183,42 +172,15 @@ function rateLimiter(req, res, next) {
   next();
 }
 
-// Character normalization + profanity guard
-const BANNED_WORDS = [
-  'fuck', 'shit', 'asshole', 'bitch', 'cunt', 'dick', 'cock', 'pussy', 'bastard', 'whore',
-  'ควย', 'เย็ด', 'เหี้ย', 'สัส', 'ชิบหาย', 'มึง', 'กู', 'ตอแหล', 'กระหรี่', 'แรด'
-];
-
+// HTML tag escaping for XSS protection while leaving content moderation purely manual for seniors
 function cleanContent(text) {
   if (!text) return "";
-  
-  // Normalization Map for common bypasses
-  const normalizeMap = {
-    '@': 'a', '4': 'a', '1': 'i', '!': 'i', '0': 'o', '3': 'e', '5': 's', '$': 's', '7': 't',
-    'เย็': 'เย็ด', 'ค.ว.ย': 'ควย'
-  };
-
-  let normalized = text.toLowerCase();
-  for (const [obfuscated, normal] of Object.entries(normalizeMap)) {
-    normalized = normalized.split(obfuscated).join(normal);
-  }
-
-  // Remove spacing/special characters to test clustered bypasses
-  const stripped = normalized.replace(/[^a-zA-Z0-9ก-๙]/g, "");
-
-  let isFlagged = false;
-  BANNED_WORDS.forEach(word => {
-    if (normalized.includes(word) || stripped.includes(word)) {
-      isFlagged = true;
-    }
-  });
-
-  if (isFlagged) {
-    // Return friendly substitution
-    return "🧡 [Spread kindness and friendly vibes!]";
-  }
-
-  return text;
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 // ----------------------------------------------------
@@ -267,7 +229,7 @@ app.post('/api/questions', rateLimiter, (req, res) => {
   }
 
   const sanitized = cleanContent(question);
-  db.run("INSERT INTO incoming_questions (question_text, status) VALUES (?, 'pending')", [sanitized], function(err) {
+  db.run("INSERT INTO incoming_questions (question_text, status) VALUES (?, 'pending')", [sanitized], function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true, id: this.lastID });
   });
@@ -290,7 +252,7 @@ app.post('/api/messages', rateLimiter, (req, res) => {
   db.run(
     "INSERT INTO message_wall (nickname, message, color_palette, sticker, is_approved) VALUES (?, ?, ?, ?, 0)",
     [cleanNickname, cleanMsg, color_palette || defaultColors, sticker || "🎉"],
-    function(err) {
+    function (err) {
       if (err) return res.status(500).json({ error: err.message });
       res.json({ success: true, id: this.lastID });
     }
@@ -345,7 +307,7 @@ app.get('/api/admin/questions', adminOnly, (req, res) => {
 
 // Dismiss / delete incoming question
 app.delete('/api/admin/questions/:id', adminOnly, (req, res) => {
-  db.run("DELETE FROM incoming_questions WHERE id = ?", [req.params.id], function(err) {
+  db.run("DELETE FROM incoming_questions WHERE id = ?", [req.params.id], function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
   });
@@ -359,7 +321,7 @@ app.post('/api/admin/categories', adminOnly, (req, res) => {
   db.run(
     "INSERT INTO categories (name, icon, color_scheme) VALUES (?, ?, ?)",
     [name, icon || 'help-circle', color_scheme || 'hsl(20, 90%, 60%)'],
-    function(err) {
+    function (err) {
       if (err) return res.status(500).json({ error: err.message });
       res.json({ success: true, id: this.lastID });
     }
@@ -372,7 +334,7 @@ app.put('/api/admin/categories/:id', adminOnly, (req, res) => {
   db.run(
     "UPDATE categories SET name = ?, icon = ?, color_scheme = ? WHERE id = ?",
     [name, icon, color_scheme, req.params.id],
-    function(err) {
+    function (err) {
       if (err) return res.status(500).json({ error: err.message });
       res.json({ success: true });
     }
@@ -381,7 +343,7 @@ app.put('/api/admin/categories/:id', adminOnly, (req, res) => {
 
 // Delete Category
 app.delete('/api/admin/categories/:id', adminOnly, (req, res) => {
-  db.run("DELETE FROM categories WHERE id = ?", [req.params.id], function(err) {
+  db.run("DELETE FROM categories WHERE id = ?", [req.params.id], function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
   });
@@ -399,7 +361,7 @@ app.post('/api/admin/faqs', adminOnly, (req, res) => {
     db.run(
       "INSERT INTO faqs (category_id, question, answer, priority_score) VALUES (?, ?, ?, ?)",
       [category_id, question, answer, priority_score || 0],
-      function(err) {
+      function (err) {
         if (err) return res.status(500).json({ error: err.message });
 
         const newFaqId = this.lastID;
@@ -426,7 +388,7 @@ app.put('/api/admin/faqs/:id', adminOnly, (req, res) => {
   db.run(
     "UPDATE faqs SET category_id = ?, question = ?, answer = ?, priority_score = ? WHERE id = ?",
     [category_id, question, answer, priority_score || 0, req.params.id],
-    function(err) {
+    function (err) {
       if (err) return res.status(500).json({ error: err.message });
       res.json({ success: true });
     }
@@ -434,7 +396,7 @@ app.put('/api/admin/faqs/:id', adminOnly, (req, res) => {
 });
 
 app.delete('/api/admin/faqs/:id', adminOnly, (req, res) => {
-  db.run("DELETE FROM faqs WHERE id = ?", [req.params.id], function(err) {
+  db.run("DELETE FROM faqs WHERE id = ?", [req.params.id], function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
   });
@@ -450,7 +412,7 @@ app.get('/api/admin/messages/pending', adminOnly, (req, res) => {
 
 // Approve a message
 app.put('/api/admin/messages/:id/approve', adminOnly, (req, res) => {
-  db.run("UPDATE message_wall SET is_approved = 1 WHERE id = ?", [req.params.id], function(err) {
+  db.run("UPDATE message_wall SET is_approved = 1 WHERE id = ?", [req.params.id], function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
   });
@@ -458,10 +420,15 @@ app.put('/api/admin/messages/:id/approve', adminOnly, (req, res) => {
 
 // Reject / delete message from the wall
 app.delete('/api/admin/messages/:id', adminOnly, (req, res) => {
-  db.run("DELETE FROM message_wall WHERE id = ?", [req.params.id], function(err) {
+  db.run("DELETE FROM message_wall WHERE id = ?", [req.params.id], function (err) {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ success: true });
   });
+});
+
+// Explicit admin route to serve the dedicated administrative page
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Fallback routing: send index.html for SPA page routes

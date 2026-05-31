@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to the Family! 🎓 Orientation Companion</title>
+  <title>ยินดีต้อนรับสู่ครอบครัว HDS-09! 🎓 แหล่งรวมข้อมูลเตรียมความพร้อมน้องใหม่</title>
   <!-- SEO & Meta -->
-  <meta name="description" content="A warm, vibrant, and fun digital orientation companion built by seniors to welcome freshmen to our big university family!">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
-  
+  <meta name="description"
+    content="พื้นที่ต้อนรับนิสิตใหม่ HDS-09 สุดอบอุ่น รวบรวมแนวทาง คู่มือ และกล่องถาม-ตอบจากพี่ ๆ สู่รุ่นน้อง เพื่อเริ่มต้นชีวิตมหาวิทยาลัยอย่างสุขใจ">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎉</text></svg>">
+
   <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  
+
   <!-- CSS Styling Sheet -->
   <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
 
   <!-- Background Celebration Particles Canvas -->
@@ -27,60 +33,58 @@
   <!-- Global Header Navigation -->
   <header class="app-header">
     <div class="header-container">
-      <div class="logo-group" onclick="navigateTo('/')">
+      <div class="logo-group" onclick="location.reload()">
         <span class="logo-icon">🎉</span>
         <div>
-          <h1 class="logo-text">WELCOME HDS-09</h1>
-          <p class="logo-subtext">Orientation Companion</p>
+          <h1 class="logo-text">WELCOME HDS gen 09</h1>
+          <p class="logo-subtext">ยินดีต้อนรับน้องๆ เข้าสู่ครอบครัว HDS น้าาา</p>
         </div>
       </div>
-      <nav class="nav-links">
-        <button id="nav-faq" class="nav-btn active" onclick="navigateTo('/')">
-          <i data-lucide="help-circle"></i> <span>FAQs</span>
+      <div class="nav-links">
+        <button onclick="accessSeniorsPanel(event)" class="nav-btn admin-badge"
+          style="text-decoration: none; background: none; border: none; font: inherit; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+          <i data-lucide="lock"></i> <span>Seniors Panel</span>
         </button>
-        <button id="nav-wall" class="nav-btn" onclick="navigateTo('/wall')">
-          <i data-lucide="message-square"></i> <span>Wall</span>
-        </button>
-        <button id="nav-admin" class="nav-btn admin-badge" onclick="navigateTo('/admin')">
-          <i data-lucide="shield-check"></i> <span>Seniors</span>
-        </button>
-      </nav>
+      </div>
     </div>
   </header>
 
-  <!-- Main Multi-Route Container -->
+  <!-- Main Unified Stack Container -->
   <main class="app-viewport">
 
-    <!-- ==================== FAQ ROUTE VIEW ==================== -->
-    <section id="route-faq" class="route-view active">
-      <!-- Welcoming Splash Card -->
-      <div class="welcome-card">
-        <div class="card-bg-gradient"></div>
-        <div class="welcome-content">
-          <span class="welcome-tag">Family Space 🧸</span>
-          <h2>Welcome to our family!</h2>
-          <p>Orientation week is full of excitement and fresh questions. Don't worry! Your seniors have gathered the best guides to make your start cozy, fun, and easy.</p>
-        </div>
+    <!-- 1. Welcoming Splash Card -->
+    <div class="welcome-card">
+      <div class="card-bg-gradient"></div>
+      <div class="welcome-content">
+        <span class="welcome-tag">พื้นที่ต้อนรับสุดอบอุ่น 🧸</span>
+        <h2>ยินดีต้อนรับสู่ครอบครัวของเรา!</h2>
+        <p>สัปดาห์ปฐมนิเทศอาจเต็มไปด้วยความตื่นเต้นและคำถามมากมาย แต่ไม่ต้องกังวลไป! พี่ ๆ
+          ได้รวบรวมข้อมูลแนวทางการเรียน การแต่งกาย และเรื่องสำคัญทั้งหมดไว้ให้ที่นี่ เพื่อให้น้อง ๆ
+          เริ่มต้นชีวิตมหาวิทยาลัยได้แบบสุดติ่งกระดิ่งแมว</p>
       </div>
+    </div>
 
-      <!-- Quick Search & Autocomplete Tags -->
+    <!-- 2. FAQ INTERACTIVE SECTION -->
+    <div class="faq-container-layout">
+      <!-- Search & Autocomplete Tags -->
       <div class="search-section">
         <div class="search-wrapper">
           <i data-lucide="search" class="search-icon"></i>
-          <input type="text" id="faq-search" placeholder="Search questions, uniform tips, campus codes..." aria-label="Search FAQs">
+          <input type="text" id="faq-search" placeholder="ค้นหาคำถาม, กฎระเบียบชุดนิสิต, การเดินทาง, วิชาเรียน..."
+            aria-label="Search FAQs">
           <button id="search-clear-btn" class="clear-btn" onclick="clearSearch()" aria-label="Clear search">
             <i data-lucide="x"></i>
           </button>
         </div>
         <div class="quick-tags" id="quick-tags-container">
-          <span class="tag-title">Quick Search:</span>
+          <span class="tag-title">ค้นหาด่วน:</span>
           <!-- Autocomplete pills will be inserted here dynamically -->
         </div>
       </div>
 
       <!-- Category Selector Segment -->
       <div class="category-segment">
-        <h3 class="section-title"><i data-lucide="layers"></i> Browse by Category</h3>
+        <h3 class="section-title"><i data-lucide="layers"></i> เรียกดูตามหมวดหมู่ข้อมูล</h3>
         <div class="category-track" id="category-track-element" role="tablist">
           <!-- Dynamic category button pill components will render here -->
         </div>
@@ -90,9 +94,9 @@
       <div class="faq-segment">
         <div class="faq-header-status">
           <h3 id="current-category-title" class="section-title">
-            <i data-lucide="help-circle"></i> Selected FAQs
+            <i data-lucide="help-circle"></i> คำถามที่พบบ่อย
           </h3>
-          <span id="faq-count-badge" class="count-badge">0 items</span>
+          <span id="faq-count-badge" class="count-badge">0 รายการ</span>
         </div>
         <div class="faq-list" id="faq-list-element">
           <!-- Dynamic FAQ Accordion lists will render here -->
@@ -103,31 +107,30 @@
       <div class="ask-card">
         <div class="ask-emoji">🙋‍♂️</div>
         <div class="ask-details">
-          <h4>Can't find your question?</h4>
-          <p>Don't sweat it! Submit an anonymous question and your seniors will write back an answer on the dashboard soon.</p>
+          <h4>หาหัวข้อคำถามที่ต้องการไม่เจอใช่ไหม?</h4>
+          <p>ไม่ต้องเครียดไปนะน้องรัก! สามารถพิมพ์ส่งคำถามแบบไม่ระบุตัวตนเข้ามาได้เลย แล้วพี่ ๆ
+            จะรีบเขียนคำอธิบายอัปเดตตอบกลับขึ้นบอร์ดคู่มือนี้ให้เร็วที่สุดครับ!</p>
         </div>
         <button class="btn btn-primary" onclick="openAskModal()">
-          <i data-lucide="send"></i> Ask Seniors
+          <i data-lucide="send"></i> ส่งคำถามถามพี่ ๆ
         </button>
       </div>
-    </section>
+    </div>
 
-    <!-- ==================== CELEBRATION WALL ROUTE VIEW ==================== -->
-    <section id="route-wall" class="route-view">
-      <div class="wall-header">
+    <!-- 3. FULL-WIDTH MESSAGE CELEBRATION WALL SECTION -->
+    <div class="wall-section-layout">
+
+      <div class="wall-header-card">
         <div class="wall-title-box">
-          <h2>🎈 Celebration Note Wall</h2>
-          <p>Share sweet greetings, encouraging quotes, or a warm welcome message with your friends and seniors!</p>
+          <h2>🎈 บอร์ดการ์ดอวยพรต้อนรับน้องใหม่</h2>
+          <p>ข้อความส่งต่อพลังบวก คำต้อนรับ และความอบอุ่นจากรุ่นพี่และเพื่อน ๆ ทุกคน!</p>
         </div>
         <div class="wall-meta">
-          <span class="live-indicator"><span class="dot animate-pulse"></span> LIVE BOARD</span>
-          <button class="btn btn-secondary btn-sm" onclick="fetchApprovedMessages()">
-            <i data-lucide="rotate-cw"></i> Refresh
-          </button>
+          <span class="live-indicator"><span class="dot animate-pulse"></span> แสดงผลเรียลไทม์</span>
         </div>
       </div>
 
-      <!-- GPU hardware-accelerated animated floating lane canvas -->
+      <!-- GPU hardware-accelerated animated floating lane canvas spanning full 100% width -->
       <div class="wall-canvas" id="wall-stream-container">
         <!-- Floating bubble elements float through lanes dynamically -->
         <div class="stream-lane" data-lane="1"></div>
@@ -137,152 +140,14 @@
         <div class="stream-lane" data-lane="5"></div>
       </div>
 
-      <!-- Add Message CTA Floating Footer -->
-      <div class="wall-footer-cta">
+      <!-- Add Message CTA Button centered underneath canvas (flows naturally) -->
+      <div class="wall-action-box">
         <button class="btn btn-primary btn-lg pulse-glow" onclick="openMessageDrawer()">
-          <i data-lucide="edit-3"></i> Write a Welcome Note
+          <i data-lucide="edit-3"></i> เขียนข้อความเลย!
         </button>
       </div>
-    </section>
 
-    <!-- ==================== ADMIN PROTECTED ROUTE VIEW ==================== -->
-    <section id="route-admin" class="route-view">
-      
-      <!-- Lock Screen State -->
-      <div id="admin-lock-screen" class="admin-auth-card">
-        <div class="auth-icon">🔑</div>
-        <h2>Seniors Workspace</h2>
-        <p>Enter the shared university passkey code to unlock the admin dashboard. (Check with the orientation core team!)</p>
-        
-        <form id="admin-auth-form" onsubmit="handleAdminAuth(event)">
-          <div class="form-group">
-            <input type="password" id="admin-passkey-input" placeholder="Enter orientation passkey..." required aria-label="Secret Passkey">
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">
-            <i data-lucide="unlock"></i> Unlock Dashboard
-          </button>
-          <p class="auth-hint">Hint: The default developer passcode is <code>welcomefamily2026</code></p>
-        </form>
-      </div>
-
-      <!-- Authorized Dashboard State -->
-      <div id="admin-workspace" class="admin-dashboard-layout" style="display:none;">
-        <aside class="admin-sidebar">
-          <div class="admin-profile">
-            <div class="admin-avatar">🎓</div>
-            <div class="admin-info">
-              <h4>Senior Admin</h4>
-              <p>Orientation Team</p>
-            </div>
-          </div>
-          <nav class="admin-nav" role="tablist">
-            <button class="admin-nav-btn active" onclick="switchAdminTab('questions')">
-              <i data-lucide="inbox"></i> Inbox Questions <span class="badge badge-danger" id="badge-incoming-count">0</span>
-            </button>
-            <button class="admin-nav-btn" onclick="switchAdminTab('moderation')">
-              <i data-lucide="check-square"></i> Moderation Wall <span class="badge badge-warning" id="badge-pending-messages">0</span>
-            </button>
-            <button class="admin-nav-btn" onclick="switchAdminTab('faqs')">
-              <i data-lucide="help-circle"></i> Manage FAQs
-            </button>
-            <button class="admin-nav-btn" onclick="switchAdminTab('categories')">
-              <i data-lucide="folder-open"></i> Manage Categories
-            </button>
-          </nav>
-          <div class="admin-sidebar-footer">
-            <button class="btn btn-outline btn-block btn-sm" onclick="handleAdminLogout()">
-              <i data-lucide="log-out"></i> Lock Dashboard
-            </button>
-          </div>
-        </aside>
-
-        <section class="admin-content-area">
-          
-          <!-- TAB 1: INCOMING FRESHMAN QUESTIONS -->
-          <div id="admin-tab-questions" class="admin-tab-view active">
-            <div class="admin-tab-header">
-              <h3>Incoming Questions Box</h3>
-              <p>These questions were submitted anonymously by freshmen and are pending a senior response.</p>
-            </div>
-            <div class="admin-card-grid" id="admin-questions-list">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
-          <!-- TAB 2: WALL MESSAGE MODERATION QUEUE -->
-          <div id="admin-tab-moderation" class="admin-tab-view">
-            <div class="admin-tab-header">
-              <h3>Wall Message Moderation</h3>
-              <p>Review submitted notes before they float publicly on the celebration wall.</p>
-            </div>
-            <div class="admin-card-grid" id="admin-moderation-list">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-
-          <!-- TAB 3: FAQ MANAGEMENT PANEL -->
-          <div id="admin-tab-faqs" class="admin-tab-view">
-            <div class="admin-tab-header">
-              <div class="header-action-group">
-                <div>
-                  <h3>FAQ Management</h3>
-                  <p>Add, edit, or remove Question-Answer cards visible to all freshmen.</p>
-                </div>
-                <button class="btn btn-primary btn-sm" onclick="openFaqEditor()">
-                  <i data-lucide="plus"></i> Add New FAQ
-                </button>
-              </div>
-            </div>
-            <div class="admin-table-container">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Question</th>
-                    <th>Category</th>
-                    <th>Priority</th>
-                    <th class="actions-col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-faqs-tbody">
-                  <!-- Dynamically populated -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- TAB 4: CATEGORY MANAGEMENT PANEL -->
-          <div id="admin-tab-categories" class="admin-tab-view">
-            <div class="admin-tab-header">
-              <div class="header-action-group">
-                <div>
-                  <h3>Category Management</h3>
-                  <p>Manage dynamic categories. FAQs are grouped under these categories.</p>
-                </div>
-                <button class="btn btn-primary btn-sm" onclick="openCategoryEditor()">
-                  <i data-lucide="plus"></i> Add Category
-                </button>
-              </div>
-            </div>
-            <div class="admin-table-container">
-              <table class="admin-table">
-                <thead>
-                  <tr>
-                    <th>Category Name</th>
-                    <th>Lucide Icon</th>
-                    <th>HSL Theme Color</th>
-                    <th class="actions-col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="admin-categories-tbody">
-                  <!-- Dynamically populated -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-        </section>
-      </div>
-    </section>
+    </div>
 
   </main>
 
@@ -292,24 +157,28 @@
   <div class="modal-overlay" id="ask-modal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3><span class="emoji">🙋‍♂️</span> Ask Our Seniors</h3>
+        <h3><span class="emoji">🙋‍♂️</span> ถามคำถามพวกพี่ ๆ</h3>
         <button class="modal-close-btn" onclick="closeAskModal()" aria-label="Close modal">
           <i data-lucide="x"></i>
         </button>
       </div>
       <form id="ask-seniors-form" onsubmit="submitQuestion(event)">
         <div class="modal-body">
-          <p class="modal-description">Have an accepted document query, bus timing concern, or hostel question? Ask anonymously. Seniors will review, write a friendly answer, and post it to our FAQs page!</p>
+          <p class="modal-description">สงสัยเรื่องการเตรียมเอกสารรายงานตัว, จุดจอดรถเมล์/ขนส่งมวลชน, การจองหอพัก
+            หรือแนวทางการเลือกเรียนวิชาต่าง ๆ ใช่ไหม? น้อง ๆ สามารถพิมพ์ถามพี่ ๆ แบบไม่เปิดเผยตัวตนได้เต็มที่เลย! พวกพี่
+            ๆ จะรีบนำไปหาคำตอบและนำมาเขียนคู่มือตอบกลับลงในส่วน FAQ บนเว็บนี้โดยเร็วที่สุดครับ</p>
           <div class="form-group">
-            <label for="freshman-question-input">Your Question *</label>
-            <textarea id="freshman-question-input" rows="4" placeholder="e.g. Do we need formal uniforms on registration day? Or can we wear sports uniforms?..." required></textarea>
-            <span class="input-limit">Keep it friendly and constructive.</span>
+            <label for="freshman-question-input">คำถามของน้องใหม่ *</label>
+            <textarea id="freshman-question-input" rows="4"
+              placeholder="เช่น วันรายงานตัวแรกต้องแต่งกายด้วยชุดพิธีการแบบเป๊ะ ๆ เลยไหมครับ หรือใส่กางเกงสแล็คทั่วไปเรียนสัปดาห์แรกได้?..."
+              required></textarea>
+            <span class="input-limit">กรุณาใช้ภาษาที่สุภาพและสร้างสรรค์ในการสื่อสารน้าจ๊ะ</span>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline" onclick="closeAskModal()">Cancel</button>
+          <button type="button" class="btn btn-outline" onclick="closeAskModal()">ยกเลิก</button>
           <button type="submit" class="btn btn-primary">
-            <i data-lucide="send"></i> Send to Seniors
+            <i data-lucide="send"></i> ส่งคำถามหาพวกพี่ ๆ
           </button>
         </div>
       </form>
@@ -320,28 +189,32 @@
   <div class="drawer-overlay" id="message-drawer">
     <div class="drawer-panel">
       <div class="drawer-header">
-        <h3><span class="emoji">📝</span> Send a Welcome Note!</h3>
+        <h3><span class="emoji">📝</span> เขียนข้อความต้อนรับ & ส่งพลังใจ</h3>
         <button class="modal-close-btn" onclick="closeMessageDrawer()" aria-label="Close drawer">
           <i data-lucide="x"></i>
         </button>
       </div>
       <form id="message-wall-form" onsubmit="submitWallMessage(event)">
         <div class="drawer-body">
-          <p class="drawer-description">Brighten orientating weeks! Leave anonymous quotes, jokes, study encouragement, or greetings. Your card floats publicly once approved by seniors.</p>
-          
+          <p class="drawer-description">มาร่วมแต่งแต้มความอบอุ่นในวันแรกของการเข้าศึกษา! ทิ้งถ้อยคำต้อนรับ คำอวยพรดี ๆ
+            หรือคำให้กำลังใจการเรียนไว้ให้เพื่อน ๆ และรุ่นน้องได้อ่านกัน</p>
+
           <div class="form-group">
-            <label for="message-nickname">Your Nickname (Optional)</label>
-            <input type="text" id="message-nickname" placeholder="e.g. Friendly Bear, Freshman G9, P' Alice" maxlength="30">
+            <label for="message-nickname">ชื่อเล่นหรือฉายาของคุณ (ไม่บังคับ)</label>
+            <input type="text" id="message-nickname" placeholder="เช่น หมีน้อยร่าเริง, เฟรชชี่รุ่น 9, พี่อลิซสุดเท่"
+              maxlength="30">
           </div>
 
           <div class="form-group">
-            <label for="message-content">Your Message *</label>
-            <textarea id="message-content" rows="3" placeholder="e.g. Good luck on day 1 everyone! We got this! 🎉" required maxlength="120" oninput="updateCharCounter(this)"></textarea>
-            <span class="input-limit-bar"><span id="msg-char-counter">0</span> / 120 chars</span>
+            <label for="message-content">ข้อความที่ต้องการส่งต่อ *</label>
+            <textarea id="message-content" rows="3"
+              placeholder="เช่น ขอให้สัปดาห์ปฐมนิเทศนี้เต็มไปด้วยความสนุกนะทุกคน! สู้ ๆ! 🎉" required maxlength="120"
+              oninput="updateCharCounter(this)"></textarea>
+            <span class="input-limit-bar"><span id="msg-char-counter">0</span> / 120 ตัวอักษร</span>
           </div>
 
           <div class="form-group">
-            <label>Select Card Dynamic Sticker</label>
+            <label>เลือกการ์ดสติกเกอร์ดุ๊กดิ๊กประดับโน้ต</label>
             <div class="sticker-selector" id="sticker-rack">
               <!-- Clickable stickers -->
               <span class="sticker-pill active" onclick="selectSticker('🎉')">🎉</span>
@@ -356,100 +229,28 @@
           </div>
 
           <div class="form-group">
-            <label>Select Warm Theme Color Gradient</label>
+            <label>เลือกโทนสีพื้นหลังไล่ระดับแบบอบอุ่น</label>
             <div class="color-selector" id="color-rack">
               <!-- Gradient preview indicators -->
-              <div class="color-pill active" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" onclick="selectGradient('linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)')"></div>
-              <div class="color-pill" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)" onclick="selectGradient('linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)')"></div>
-              <div class="color-pill" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%)" onclick="selectGradient('linear-gradient(135deg, #f6d365 0%, #fda085 100%)')"></div>
-              <div class="color-pill" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)" onclick="selectGradient('linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)')"></div>
-              <div class="color-pill" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)" onclick="selectGradient('linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)')"></div>
-              <div class="color-pill" style="background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%)" onclick="selectGradient('linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%)')"></div>
+              <div class="color-pill active" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+                onclick="selectGradient('linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)')"></div>
+              <div class="color-pill" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)"
+                onclick="selectGradient('linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)')"></div>
+              <div class="color-pill" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
+                onclick="selectGradient('linear-gradient(135deg, #f6d365 0%, #fda085 100%)')"></div>
+              <div class="color-pill" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+                onclick="selectGradient('linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)')"></div>
+              <div class="color-pill" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+                onclick="selectGradient('linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)')"></div>
+              <div class="color-pill" style="background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%)"
+                onclick="selectGradient('linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%)')"></div>
             </div>
           </div>
         </div>
         <div class="drawer-footer">
-          <button type="button" class="btn btn-outline btn-block" onclick="closeMessageDrawer()">Cancel</button>
+          <button type="button" class="btn btn-outline btn-block" onclick="closeMessageDrawer()">ยกเลิก</button>
           <button type="submit" class="btn btn-primary btn-block">
-            <i data-lucide="check"></i> Submit to Moderation Queue
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 3. Admin Add/Edit FAQ Modal -->
-  <div class="modal-overlay" id="admin-faq-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="faq-modal-title">Create FAQ</h3>
-        <button class="modal-close-btn" onclick="closeFaqEditor()" aria-label="Close modal">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-      <form id="admin-faq-form" onsubmit="saveFaq(event)">
-        <input type="hidden" id="faq-editor-id">
-        <input type="hidden" id="faq-editor-convert-id">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="faq-editor-question">Question *</label>
-            <input type="text" id="faq-editor-question" required placeholder="e.g. When are class handbooks distributed?">
-          </div>
-          <div class="form-group">
-            <label for="faq-editor-category">Category Assignment *</label>
-            <select id="faq-editor-category" required>
-              <!-- Dynamic options -->
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="faq-editor-answer">Answer Content *</label>
-            <textarea id="faq-editor-answer" rows="4" required placeholder="e.g. They are handed out directly on Building C..."></textarea>
-          </div>
-          <div class="form-group">
-            <label for="faq-editor-priority">Priority Score (Higher floats first)</label>
-            <input type="number" id="faq-editor-priority" value="0">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline" onclick="closeFaqEditor()">Cancel</button>
-          <button type="submit" class="btn btn-primary">
-            <i data-lucide="save"></i> Save FAQ
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 4. Admin Add/Edit Category Modal -->
-  <div class="modal-overlay" id="admin-category-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="category-modal-title">Create Category</h3>
-        <button class="modal-close-btn" onclick="closeCategoryEditor()" aria-label="Close modal">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-      <form id="admin-category-form" onsubmit="saveCategory(event)">
-        <input type="hidden" id="category-editor-id">
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="category-editor-name">Category Name *</label>
-            <input type="text" id="category-editor-name" required placeholder="e.g. Hostel Life 🏠">
-          </div>
-          <div class="form-group">
-            <label for="category-editor-icon">Lucide Icon Class Name</label>
-            <input type="text" id="category-editor-icon" placeholder="e.g. home, map-pin, shirt, clipboard" value="help-circle">
-            <span class="input-limit">Specify any standard Lucide icon name (e.g. clipboard, shirt, book-open, map-pin).</span>
-          </div>
-          <div class="form-group">
-            <label for="category-editor-color">HSL Color State</label>
-            <input type="text" id="category-editor-color" placeholder="e.g. hsl(165, 80%, 45%)" value="hsl(20, 90%, 60%)">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline" onclick="closeCategoryEditor()">Cancel</button>
-          <button type="submit" class="btn btn-primary">
-            <i data-lucide="save"></i> Save Category
+            <i data-lucide="check"></i> ส่งการ์ดอวยพรเข้าคิวตรวจสอบ
           </button>
         </div>
       </form>
@@ -459,10 +260,11 @@
   <!-- Dynamic Feedback Notification Toast Alert -->
   <div id="global-toast" class="toast-alert" role="alert" aria-live="assertive">
     <span class="toast-icon">✨</span>
-    <span class="toast-message">Task finished successfully!</span>
+    <span class="toast-message">บันทึกสำเร็จเรียบร้อย!</span>
   </div>
 
-  <!-- Core Single Page Application Logic script -->
+  <!-- Core freshmen scripts logic -->
   <script src="index.js"></script>
 </body>
+
 </html>

@@ -180,7 +180,7 @@ body {
   border: 1px dashed rgba(255, 126, 95, 0.4);
 }
 
-/* 4. Page Viewports Routing */
+/* 4. Page Viewports & Unified Dashboard Layout (Stacked) */
 .app-viewport {
   max-width: 1200px;
   margin: 0 auto;
@@ -188,13 +188,45 @@ body {
   min-height: calc(100vh - 75px);
 }
 
-.route-view {
-  display: none;
+.dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   animation: view-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.route-view.active {
-  display: block;
+.faq-container-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Beautiful full-width bottom section for the celebration wall */
+.wall-section-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-top: 2px dashed var(--border-light);
+  padding-top: 40px;
+  margin-top: 20px;
+}
+
+.wall-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Fullscreen slide-over panel controls for administrative work */
+.drawer-full {
+  justify-content: flex-end;
+}
+
+.drawer-panel-wide {
+  max-width: 95vw !important;
+  width: 1100px !important;
 }
 
 /* 5. Welcome Card (Orientation Feel) */
@@ -609,12 +641,11 @@ body {
   box-shadow: 0 0 8px #84fab0;
 }
 
-/* Message lanes structure */
+/* Message lanes structure - Spans full width! */
 .wall-canvas {
   background-color: var(--bg-header);
   border-radius: var(--radius-lg);
-  height: calc(100vh - 280px);
-  min-height: 480px;
+  height: 520px; /* Cozy fixed height for full-screen float loops */
   position: relative;
   overflow: hidden;
   box-shadow: inset 0 4px 30px rgba(0, 0, 0, 0.4);
@@ -625,25 +656,26 @@ body {
 }
 
 .stream-lane {
-  width: calc(100% / 5);
+  width: calc(100% / 5); /* 5 wide lanes across 1200px (240px wide each!) */
   height: 100%;
   position: relative;
 }
 
-/* Upward floating bubble design */
+/* Upward floating bubble design - Pillowy, rounded, spacious */
 .msg-bubble {
   position: absolute;
-  bottom: -200px;
+  top: 100%; /* Start exactly at the bottom edge of the container */
   width: 90%;
   left: 5%;
-  border-radius: var(--radius-md);
-  padding: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-radius: 20px; /* Soft round balloon style */
+  padding: 18px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
   animation: floatUp 16s linear infinite;
   cursor: pointer;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
   user-select: none;
-  will-change: transform;
+  will-change: transform, top;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .msg-bubble:hover {
@@ -684,13 +716,12 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Interactive Message pause modal/popover */
-.wall-footer-cta {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
+/* Wall CTA action centered block - flows naturally with scrolling! */
+.wall-action-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 24px;
 }
 
 /* 11. Buttons & Form inputs UI */
@@ -1364,13 +1395,19 @@ body {
 
 @keyframes floatUp {
   0% {
-    transform: translate3d(0, 100vh, 0) scale(0.9);
+    top: 100%;
+    transform: scale(0.8) translate3d(0, 0, 0);
     opacity: 0;
   }
-  15% { opacity: 1; }
-  85% { opacity: 1; }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
   100% {
-    transform: translate3d(0, -110%, 0) scale(1);
+    top: -240px; /* Float entirely above the top of the container card */
+    transform: scale(1) translate3d(0, 0, 0);
     opacity: 0;
   }
 }
@@ -1405,38 +1442,17 @@ body {
     font-size: 36px;
   }
   
-  /* FAQ route adaptations to side-by-side grid panels */
-  #route-faq {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 32px;
-  }
-  
-  .welcome-card {
-    grid-column: 1 / span 2;
-  }
-  
+  /* FAQ Suite Sticky elements on desktop */
   .search-section {
-    grid-column: 1;
-    height: fit-content;
     position: sticky;
     top: 90px;
-  }
-  
-  .category-segment {
-    grid-column: 2;
-  }
-  
-  .faq-segment {
-    grid-column: 2;
+    z-index: 10;
   }
   
   .ask-card {
-    grid-column: 1;
-    height: fit-content;
     position: sticky;
     top: 360px;
-    margin-top: 0;
+    z-index: 10;
   }
   
   .category-track {

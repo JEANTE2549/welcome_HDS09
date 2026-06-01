@@ -254,7 +254,19 @@
           </div>
           <div class="form-group">
             <label for="category-editor-color">โค้ดรหัสสีสัน HSL ประจำกลุ่มข้อมูล</label>
-            <input type="text" id="category-editor-color" placeholder="เช่น hsl(165, 80%, 45%)" value="hsl(20, 90%, 60%)">
+            <input type="text" id="category-editor-color" placeholder="เช่น hsl(165, 80%, 45%)" value="hsl(20, 90%, 60%)" oninput="matchColorPalettePills()">
+            
+            <label style="margin-top: 12px; margin-bottom: 8px; font-size: 12px; font-weight: 600; color: var(--text-muted); display: block;">
+              🎨 แตะจานสีสำเร็จรูปด่วน (Cozy Pantone Presets)
+            </label>
+            <div class="color-selector" id="category-color-rack" style="margin-top: 6px;">
+              <div class="color-pill" style="background: hsl(14, 95%, 63%)" onclick="selectCategoryPresetColor('hsl(14, 95%, 63%)', this)" data-color="hsl(14, 95%, 63%)" title="Sunny Coral"></div>
+              <div class="color-pill" style="background: hsl(165, 80%, 43%)" onclick="selectCategoryPresetColor('hsl(165, 80%, 43%)', this)" data-color="hsl(165, 80%, 43%)" title="Fresh Mint"></div>
+              <div class="color-pill" style="background: hsl(210, 90%, 60%)" onclick="selectCategoryPresetColor('hsl(210, 90%, 60%)', this)" data-color="hsl(210, 90%, 60%)" title="Sky Blue"></div>
+              <div class="color-pill" style="background: hsl(45, 95%, 55%)" onclick="selectCategoryPresetColor('hsl(45, 95%, 55%)', this)" data-color="hsl(45, 95%, 55%)" title="Golden Amber"></div>
+              <div class="color-pill" style="background: hsl(330, 85%, 62%)" onclick="selectCategoryPresetColor('hsl(330, 85%, 62%)', this)" data-color="hsl(330, 85%, 62%)" title="Playful Rose"></div>
+              <div class="color-pill" style="background: hsl(270, 80%, 65%)" onclick="selectCategoryPresetColor('hsl(270, 80%, 65%)', this)" data-color="hsl(270, 80%, 65%)" title="Sweet Lavender"></div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

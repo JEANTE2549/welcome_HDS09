@@ -157,6 +157,7 @@ body {
   padding: 40px 48px;
   overflow-y: auto;
   max-height: 100vh;
+  min-width: 0; /* Prevents grid cell horizontal overflow due to wide tables */
 }
 
 .admin-tab-view {
@@ -277,7 +278,10 @@ body {
 
 /* Administrative management data CRUD tables */
 .admin-table-container {
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border: 2px solid var(--border-light);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
@@ -346,15 +350,39 @@ body {
 }
 
 /* Responsive screen overrides */
+@media (max-width: 1024px) {
+  /* Fits iPads and mid-sized notebooks beautifully */
+  .admin-dashboard-layout {
+    grid-template-columns: 240px 1fr;
+  }
+  .admin-sidebar {
+    padding: 24px 16px;
+  }
+  .admin-nav-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 900px) {
+  /* Tablets and iPad Portrait viewports */
   .admin-dashboard-layout {
     grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
   
   .admin-sidebar {
     border-right: none;
     border-bottom: 1px solid var(--border-light);
-    padding: 24px;
+    padding: 20px;
+    height: auto;
+    min-height: 0;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden; /* Prevent horizontal expansion */
   }
   
   .admin-nav {
@@ -362,14 +390,171 @@ body {
     overflow-x: auto;
     padding-bottom: 10px;
     gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    flex: none; /* Prevent nav container from stretching vertically */
+    align-items: center; /* Center buttons vertically, preventing stretching */
+    width: 100%;
+    max-width: 100%;
   }
   
   .admin-nav-btn {
     width: auto;
     flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 13px;
+    height: auto; /* Prevent button from stretching vertically */
   }
   
   .admin-content-area {
-    padding: 24px;
+    padding: 24px 20px;
+    min-width: 0;
+  }
+  
+  .admin-sidebar-footer {
+    flex-direction: row;
+    margin-top: 12px;
+    gap: 8px;
+    width: 100%;
+  }
+  
+  .admin-sidebar-footer a,
+  .admin-sidebar-footer button {
+    flex: 1;
+    margin-bottom: 0 !important;
+    padding: 10px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Smartphones (iPhone, Samsung, etc.) */
+  .admin-sidebar {
+    padding: 16px;
+  }
+  
+  .admin-profile {
+    margin-bottom: 20px;
+    gap: 8px;
+  }
+  
+  .admin-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 24px;
+  }
+  
+  .admin-info h4 {
+    font-size: 14px;
+  }
+  
+  .admin-sidebar-footer {
+    flex-direction: column; /* Stack side-by-side buttons vertically on very small screens */
+    gap: 8px;
+    width: 100%;
+    margin-top: 12px;
+  }
+  
+  .admin-sidebar-footer a,
+  .admin-sidebar-footer button {
+    width: 100%;
+    flex: none;
+    margin-bottom: 0 !important;
+    text-align: center;
+    justify-content: center;
+    white-space: normal;
+  }
+  
+  .admin-content-area {
+    padding: 16px;
+  }
+  
+  .admin-tab-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+  
+  .admin-tab-header h3 {
+    font-size: 20px;
+  }
+  
+  .admin-tab-header p {
+    font-size: 12px;
+  }
+  
+  .header-action-group {
+    flex-direction: column; /* Stack heading and action button vertically */
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .header-action-group button {
+    width: 100%; /* Make add button full width on mobile */
+    justify-content: center;
+  }
+  
+  .admin-card-grid {
+    grid-template-columns: 1fr; /* Single column card grids on mobile */
+    gap: 16px;
+  }
+  
+  /* Make moderation actions responsive and prevent button text overflows */
+  .admin-mod-card .inbox-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+  }
+  
+  .admin-mod-card .inbox-actions button:first-child {
+    flex: 1;
+    justify-content: center;
+    font-size: 12px;
+    padding: 8px 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .admin-mod-card .inbox-actions button.btn-icon {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Smooth horizontal scrolling for tables on mobile */
+  .admin-table-container {
+    border-width: 1px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .admin-table th, .admin-table td {
+    padding: 12px 14px;
+    font-size: 13px;
+    white-space: nowrap; /* Avoid vertical text squishing inside tables */
+  }
+  
+  .admin-table td strong {
+    white-space: normal; /* Allow question content to wrap beautifully */
+    display: block;
+    min-width: 200px;
+  }
+  
+  .actions-col {
+    width: auto;
+    white-space: nowrap;
+  }
+  
+  /* Make edit/delete action button layouts clean and accessible */
+  .btn-icon {
+    width: 32px;
+    height: 32px;
   }
 }

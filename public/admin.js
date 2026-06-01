@@ -435,6 +435,34 @@ async function fetchAdminCategoryManagerList() {
   lucide.createIcons();
 }
 
+function selectCategoryPresetColor(colorString, element) {
+  document.getElementById('category-editor-color').value = colorString;
+  const rack = document.getElementById('category-color-rack');
+  if (rack) {
+    rack.querySelectorAll('.color-pill').forEach(pill => {
+      pill.classList.remove('active');
+    });
+  }
+  if (element) {
+    element.classList.add('active');
+  }
+}
+
+function matchColorPalettePills() {
+  const colorVal = document.getElementById('category-editor-color').value.trim().toLowerCase();
+  const rack = document.getElementById('category-color-rack');
+  if (!rack) return;
+  
+  rack.querySelectorAll('.color-pill').forEach(pill => {
+    const pillColor = pill.getAttribute('data-color').trim().toLowerCase();
+    if (pillColor === colorVal) {
+      pill.classList.add('active');
+    } else {
+      pill.classList.remove('active');
+    }
+  });
+}
+
 function openCategoryEditor(editCatId = null) {
   const modal = document.getElementById('admin-category-modal');
   modal.classList.add('open');
@@ -450,7 +478,11 @@ function openCategoryEditor(editCatId = null) {
     document.getElementById('category-modal-title').textContent = "สร้างหมวดหมู่ข้อมูลใหม่";
     document.getElementById('admin-category-form').reset();
     document.getElementById('category-editor-id').value = '';
+    document.getElementById('category-editor-color').value = 'hsl(14, 95%, 63%)';
   }
+  
+  // Auto highlight the correct preset color pill matching the input color value
+  matchColorPalettePills();
 }
 
 function closeCategoryEditor() {

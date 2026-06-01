@@ -471,6 +471,10 @@ body {
   background-color: var(--border-light);
   padding: 4px 10px;
   border-radius: 50px;
+  white-space: nowrap; /* Prevent text/emoji wrapping inside badges */
+  display: inline-flex; /* Ensure flex centering for emojis */
+  align-items: center;
+  gap: 4px;
 }
 
 .faq-list {
@@ -819,11 +823,21 @@ body {
   border-radius: var(--radius-lg);
   width: 90%;
   max-width: 500px;
+  max-height: 90dvh; /* Limit modal card height to visible dynamic screen */
   box-shadow: var(--shadow-lg);
   transform: scale(0.95);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
   border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-card form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .modal-overlay.open .modal-card {
@@ -869,6 +883,8 @@ body {
 
 .modal-body {
   padding: 24px;
+  overflow-y: auto; /* Enable scrollbar within the body if it exceeds max-height */
+  flex: 1;
 }
 
 .modal-description {
@@ -929,6 +945,7 @@ body {
   width: 100%;
   max-width: 460px;
   height: 100%;
+  height: 100dvh; /* Strictly fit to dynamic viewport height to prevent browser-chrome cuts */
   position: absolute;
   right: 0;
   box-shadow: var(--shadow-lg);
@@ -936,6 +953,13 @@ body {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+}
+
+.drawer-panel form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .drawer-overlay.open .drawer-panel {
@@ -1442,18 +1466,7 @@ body {
     font-size: 36px;
   }
   
-  /* FAQ Suite Sticky elements on desktop */
-  .search-section {
-    position: sticky;
-    top: 90px;
-    z-index: 10;
-  }
-  
-  .ask-card {
-    position: sticky;
-    top: 360px;
-    z-index: 10;
-  }
+
   
   .category-track {
     flex-wrap: wrap;
@@ -1474,22 +1487,36 @@ body {
   
   .admin-dashboard-layout {
     grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
   
   .admin-sidebar {
     border-right: none;
     border-bottom: 1px solid var(--border-light);
+    height: auto;
+    min-height: 0;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
   
   .admin-nav {
     flex-direction: row;
     overflow-x: auto;
     padding-bottom: 8px;
+    flex: none;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
   }
   
   .admin-nav-btn {
     width: auto;
     flex-shrink: 0;
+    height: auto;
   }
   
   .wall-canvas {
@@ -1502,6 +1529,23 @@ body {
   
   .stream-lane {
     width: calc(100% / 3);
+  }
+  
+  .ask-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 20px;
+    gap: 16px;
+  }
+  
+  .ask-details {
+    text-align: center;
+  }
+  
+  .ask-card p {
+    white-space: normal;
+    word-break: break-word;
   }
 }
 

@@ -1,0 +1,24 @@
+{
+  "name": "welcome-hds09",
+  "version": "1.0.0",
+  "description": "Vibrant, zero-configuration freshman portal and celebration wall",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "orientation",
+    "freshmen",
+    "university"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  }
+}
